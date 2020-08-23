@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Player } from '../player';
+import { Player, World } from '../player';
 import { FishingZone } from '../fishing-zone';
 
 @Component({
@@ -11,8 +11,13 @@ export class FishingZoneComponent implements OnInit {
 
   public fishingZone: FishingZone;
 
-  constructor(public player: Player) {
+  constructor(public player: Player, public world: World) {
     this.fishingZone = player.currentFishingZone;
+  }
+
+  public changeFishingZone(fishingZoneName: string): void {
+    this.player.currentFishingZone = this.world.fishingZones.find(fishingZone => fishingZone.name == fishingZoneName);
+    this.fishingZone = this.player.currentFishingZone;
   }
 
   ngOnInit(): void {

@@ -9,6 +9,10 @@ export class Player {
     public currentFishingZone: FishingZone;
 
     public catch(fishType: string): void {
+        if (!this.fishInventory.get(fishType)) {
+            this.fishInventory.set(fishType, 0);
+        }
+
         this.fishInventory.set(fishType, this.fishInventory.get(fishType) + 1);
     }
 }
@@ -20,9 +24,14 @@ export class World {
     public fishingZones: Array<FishingZone> = new Array();
 
     constructor() {
-        let fishingZone1 = new FishingZone();
+        let fishingZone1 = new FishingZone('FishingZone1');
         fishingZone1.fishTypes.push('TestFish1');
         fishingZone1.fishTypes.push('TestFish2');
         this.fishingZones.push(fishingZone1)
+
+        let fishingZone2 = new FishingZone('FishingZone2');
+        fishingZone2.fishTypes.push('TestFish3');
+        fishingZone2.fishTypes.push('TestFish4');
+        this.fishingZones.push(fishingZone2);
     }
 }
