@@ -1,11 +1,15 @@
 <h2>Fishing Zone</h2>
+<div>
+  <h3>Current Fishing Zone</h3>
+  <p>{{player.currentFishingZone.name}}</p>
+</div>
+<div>
+  <h3>Available Fish</h3>
+  <p *ngFor='let fish of player.currentFishingZone.fishTypes'>{{fish}}</p>
+</div>
 <div ngbDropdown class='d-inline-block'>
-    <button class='btn btn-secondary' id="dropdownMenuButton" ngbDropdownToggle>Fishing Zone</button>
+    <button class='btn btn-secondary' id="dropdownMenuButton" ngbDropdownToggle>Change Fishing Zone</button>
     <div ngbDropdownMenu aria-labelledby="dropdownMenuButton">
       <button *ngFor='let fishingZone of world.fishingZones' ngbDropdownItem (click)=changeFishingZone(fishingZone.name)>{{fishingZone.name}}</button>
     </div>
-</div>
-<div *ngFor='let fishType of fishingZone.fishTypes'>
-    <p>{{fishType}}</p>
-    <button type='button' (click)=player.catch(fishType)>Catch</button>
 </div>

@@ -8,6 +8,7 @@ import { Fish, Price } from './fish';
 export class Player {
     public fishInventory: Map<string, number> = new Map();
     public currentFishingZone: FishingZone;
+    public activeFish: string;
 
     constructor(public world: World) {
 
@@ -24,6 +25,10 @@ export class Player {
         }
 
         this.addToInventory(fishType);
+    }
+
+    public catchActiveFish(): void {
+        this.catch(this.activeFish);
     }
 
     private purchase(fishType: string): void {

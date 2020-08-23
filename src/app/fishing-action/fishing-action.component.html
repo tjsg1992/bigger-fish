@@ -1,0 +1,14 @@
+<h2>Fishing Action</h2>
+<div ngbDropdown class='d-inline-block'>
+    <button class='btn btn-secondary' id="dropdownMenuButton" ngbDropdownToggle>Current Fish</button>
+    <div ngbDropdownMenu aria-labelledby="dropdownMenuButton">
+        <button *ngFor='let fish of player.currentFishingZone.fishTypes' ngbDropdownItem (click)=changeActiveFish(fish)>{{fish}}</button>
+    </div>
+</div>
+<div>
+    <h3>Current Fish</h3>
+    <p>{{player.activeFish}}</p>
+</div>
+<div>
+    <button class='btn btn-primary' id='catchFishButton' (click)=player.catchActiveFish()>Catch</button>
+</div>
