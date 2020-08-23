@@ -1,0 +1,5 @@
+<h2>Fishing Zone</h2>
+<div *ngFor='let fishType of fishingZone.fishTypes'>
+    <p>{{fishType}}</p>
+    <button type='button' (click)=player.catch(fishType)>Catch</button>
+</div>
