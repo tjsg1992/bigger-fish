@@ -2,6 +2,41 @@ import { Injectable } from '@angular/core';
 import { FishingZone } from './fishing-zone';
 import { Fish, Price } from './fish';
 
+// export class CatchTracker {
+//     public timeElapsed: number = 0;
+//     public interval = 100;
+//     public duration: number;
+//     public percentageComplete: number = 0;
+
+//     constructor(public player: Player) {
+        
+//     }
+
+//     public start(duration: number) {
+//         if (this.timeElapsed > 0) {
+//             return;
+//         }
+
+//         this.duration = duration;
+//         this.interval = setInterval(() => {
+//             if (this.timeElapsed < this.duration) {
+//                 this.timeElapsed += this.interval;
+//                 this.percentageComplete = (this.timeElapsed / this.duration) * 100;
+//                 console.log(this.percentageComplete);
+//             } else {
+//                 this.player.resolveCatch();
+//                 this.reset();
+//             }
+//         }, this.interval)
+//     }
+
+//     public reset(): void {
+//         this.percentageComplete = 0;
+//         this.timeElapsed = 0;
+//         clearInterval(this.interval);
+//     }
+// }
+
 @Injectable({
     providedIn: 'root'
   })
@@ -9,9 +44,10 @@ export class Player {
     public fishInventory: Map<string, number> = new Map();
     public currentFishingZone: FishingZone;
     public activeFish: string;
+    // public catchTracker: CatchTracker = new CatchTracker(this);
 
     constructor(public world: World) {
-
+        
     }
 
     public catch(fishType: string): void {
@@ -23,8 +59,12 @@ export class Player {
                 return;
             }            
         }
+        // this.catchTracker.start(1000);
+        
+    }
 
-        this.addToInventory(fishType);
+    public resolveCatch(): void {
+        this.addToInventory(this.activeFish);
     }
 
     public catchActiveFish(): void {

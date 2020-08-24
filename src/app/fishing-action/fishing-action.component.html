@@ -10,5 +10,8 @@
     <p>{{player.activeFish}}</p>
 </div>
 <div>
-    <button class='btn btn-primary' id='catchFishButton' (click)=player.catchActiveFish()>Catch</button>
+    <button class='btn btn-primary' id='catchFishButton' (click)=catchActiveFish()>Catch</button>
+    <div class='progress'>
+        <div class='progress-bar' role='progressbar' [style.width]="currentPercentage + '%'">{{currentPercentage}}</div>
+    </div>
 </div>
