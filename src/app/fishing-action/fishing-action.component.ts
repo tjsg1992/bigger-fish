@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Player, World } from '../player';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-fishing-action',
@@ -20,8 +21,11 @@ export class FishingActionComponent implements OnInit {
   }
 
   public catchActiveFish(): void {
-    this.player.catchActiveFish();
-    this.catchTracker.start(1000);
+    if (this.player.canCatchActiveFish()) {
+      this.player.purchaseActiveFish();
+      this.catchTracker.start(1000);
+    }
+    
   }
 
   public resolveCatch(): void {
@@ -32,9 +36,9 @@ export class FishingActionComponent implements OnInit {
 
 export class CatchTracker {
   public timeElapsed: number = 0;
-  public interval = 100;
+  public intervalLength = 10;
   public duration: number;
-  public percentageComplete: number = 0;
+  public interval;
 
   constructor(public callback: FishingActionComponent) {
       
@@ -47,19 +51,20 @@ export class CatchTracker {
 
       this.duration = duration;
       this.interval = setInterval(() => {
-          if (this.timeElapsed < this.duration) {
-              this.timeElapsed += this.interval;
-              $scope.percentageComplete = (this.timeElapsed / this.duration) * 100;
+        let percentageComplete = (this.timeElapsed / this.duration) * 100;
+          if (this.timeElapsed < this.duration + this.intervalLength) {
+              this.timeElapsed += this.intervalLength;
+              $('.progress-bar').css('width', percentageComplete + '%');
           } else {
               this.callback.resolveCatch();
               this.reset();
           }
-      }, this.interval)
+      }, this.intervalLength)
   }
 
   public reset(): void {
-      this.percentageComplete = 0;
       this.timeElapsed = 0;
+      $('.progress-bar').css('width', '0%');
       clearInterval(this.interval);
   }
 }
