@@ -12,12 +12,12 @@ export class FishingZoneComponent implements OnInit {
   public fishingZone: FishingZone;
 
   constructor(public player: Player, public world: World) {
-    this.fishingZone = player.currentFishingZone;
+    this.fishingZone = player.getFishingZone();
   }
 
   public changeFishingZone(fishingZoneName: string): void {
-    this.player.currentFishingZone = this.world.fishingZones.find(fishingZone => fishingZone.name == fishingZoneName);
-    this.fishingZone = this.player.currentFishingZone;
+    this.player.setFishingZone(this.world.fishingZones.find(fishingZone => fishingZone.name == fishingZoneName));
+    this.fishingZone = this.player.getFishingZone();
   }
 
   ngOnInit(): void {

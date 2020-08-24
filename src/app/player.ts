@@ -7,11 +7,20 @@ import { Fish, Price } from './fish';
   })
 export class Player {
     public fishInventory: Map<string, number> = new Map();
-    public currentFishingZone: FishingZone;
+    private fishingZone: FishingZone;
     public activeFish: string;
 
     constructor(public world: World) {
         
+    }
+
+    public setFishingZone(fishingZone: FishingZone) {
+        this.fishingZone = fishingZone;
+        this.activeFish = this.fishingZone.fishTypes[0];
+    }
+
+    public getFishingZone(): FishingZone {
+        return this.fishingZone;
     }
 
     public canCatch(fishType: string): boolean {
@@ -79,5 +88,9 @@ export class World {
 
     public getFish(fishType: string): Fish {
         return this.fish.find(fish => fish.type == fishType);
+    }
+
+    public getFishingZone(fishingZoneName: string): FishingZone {
+        return this.fishingZones.find(fishingZone => fishingZone.name == fishingZoneName);
     }
 }

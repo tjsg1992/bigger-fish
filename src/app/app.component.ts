@@ -13,7 +13,7 @@ export class AppComponent {
   constructor(public player: Player, public world: World) {
     player.fishInventory.set("TestFish1", 5);
     player.fishInventory.set("TestFish2", 3);
-    player.currentFishingZone = world.fishingZones[0];
+    player.setFishingZone(world.fishingZones[0]);
   }
 
 }
