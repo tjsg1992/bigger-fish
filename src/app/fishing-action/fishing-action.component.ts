@@ -23,7 +23,7 @@ export class FishingActionComponent implements OnInit {
   public catchActiveFish(): void {
     if (this.player.canCatchActiveFish()) {
       this.player.purchaseActiveFish();
-      this.catchTracker.start(1000);
+      this.catchTracker.start(this.world.getFish(this.player.activeFish).duration);
     }
     
   }

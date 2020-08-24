@@ -15,7 +15,7 @@ export class Player {
     }
 
     public canCatch(fishType: string): boolean {
-        let fish = this.world.fish.find(fish => fish.type == fishType);
+        let fish = this.world.getFish(fishType);
         if (!fish.price) {
             return true;
         }
@@ -32,7 +32,7 @@ export class Player {
     }
 
     private purchase(fishType: string): void {
-        let fish = this.world.fish.find(fish => fish.type == fishType);
+        let fish = this.world.getFish(fishType);
         if (!fish.price) {
             return;
         }
@@ -60,8 +60,8 @@ export class World {
     public fish: Array<Fish> = new Array();
 
     constructor() {
-        let testFish1 = new Fish('TestFish1');
-        let testFish2 = new Fish('TestFish2');
+        let testFish1 = new Fish('TestFish1', 1000);
+        let testFish2 = new Fish('TestFish2', 5000);
         testFish2.price = new Price('TestFish1', 2);
         this.fish.push(testFish1);
         this.fish.push(testFish2);
@@ -75,5 +75,9 @@ export class World {
         fishingZone2.fishTypes.push('TestFish3');
         fishingZone2.fishTypes.push('TestFish4');
         this.fishingZones.push(fishingZone2);
+    }
+
+    public getFish(fishType: string): Fish {
+        return this.fish.find(fish => fish.type == fishType);
     }
 }
