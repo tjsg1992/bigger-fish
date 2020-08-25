@@ -1,0 +1,4 @@
+<h2>Upgrade Menu</h2>
+<div *ngFor='let upgrade of world.upgrades'>
+    <button *ngIf='upgrade.hidden == false' class='btn btn-primary' (click)=buyUpgrade(upgrade)>{{upgrade.name}}<br/>Costs {{upgrade.price.costAmount}} {{upgrade.price.costType}}<br/>{{upgrade.description}}</button>
+</div>

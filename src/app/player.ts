@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FishingZone } from './fishing-zone';
 import { World } from './world'
+import { Price } from './fish'
 
 @Injectable({
     providedIn: 'root'
@@ -29,15 +30,18 @@ export class Player {
             return true;
         }
 
-        let canCatch = true;
-        fish.prices.forEach(price => {
+        return this.canAfford(fish.prices);
+    }
+
+    public canAfford(prices: Array<Price>): boolean {
+        let canAfford = true;
+        prices.forEach(price => {
             let fishInInventory = this.fishInventory.get(price.costType);
             if (!fishInInventory || fishInInventory < price.costAmount) {
-                canCatch = false;
+                canAfford = false;
             }
         })
-        return canCatch;
-
+        return canAfford;
     }
 
     public resolveCatch(): void {
@@ -48,13 +52,16 @@ export class Player {
         return this.canCatch(this.activeFish);
     }
 
-    private purchase(fishType: string): void {
+    public purchase(fishType: string): void {
         let fish = this.world.getFish(fishType);
         if (!fish.prices || fish.prices.length == 0) {
             return;
         }
+        this.pay(fish.prices);
+    }
 
-        fish.prices.forEach(price => {
+    public pay(prices: Array<Price>) {
+        prices.forEach(price => {
             this.fishInventory.set(price.costType, this.fishInventory.get(price.costType) - price.costAmount);
         })
     }

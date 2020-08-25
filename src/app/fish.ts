@@ -1,7 +1,7 @@
 export class Fish {
     public prices: Array<Price>;
 
-    constructor(public type: string, public duration: number) {
+    constructor(public type: string, public difficulty: number) {
 
     }
 }

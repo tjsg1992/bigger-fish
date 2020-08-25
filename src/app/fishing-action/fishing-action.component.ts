@@ -24,7 +24,7 @@ export class FishingActionComponent implements OnInit {
   public catchActiveFish(): void {
     if (this.player.canCatchActiveFish()) {
       this.player.purchaseActiveFish();
-      this.catchTracker.start(this.world.getFish(this.player.activeFish).duration);
+      this.catchTracker.start(this.world.getFish(this.player.activeFish).difficulty);
     }
     
   }
@@ -45,12 +45,14 @@ export class CatchTracker {
       
   }
 
-  public start(duration: number) {
+  public start(difficulty: number) {
       if (this.timeElapsed > 0) {
           return;
       }
 
-      this.duration = duration;
+      this.duration = difficulty * 100;
+      //TEMP
+      // this.duration = 1;
       this.interval = setInterval(() => {
         let percentageComplete = (this.timeElapsed / this.duration) * 100;
           if (this.timeElapsed < this.duration + this.intervalLength) {

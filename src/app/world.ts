@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FishingZone } from './fishing-zone';
 import { Fish } from './fish';
+import { Upgrade } from './upgrade'
 
 @Injectable({
     providedIn: 'root'
@@ -8,6 +9,7 @@ import { Fish } from './fish';
 export class World {
     public fishingZones: Array<FishingZone> = fishingZones;
     public fish: Array<Fish> = fishTypes;
+    public upgrades: Array<Upgrade> = upgrades;
 
     constructor() {
 
@@ -23,56 +25,56 @@ export class World {
 }
 
 let fishTypes: Array<Fish> = [
-    {"type":"Minnow", "duration":1000, "prices":null},
-    {"type":"Guppie", "duration":1000, "prices":[
+    {"type":"Minnow", "difficulty":10, "prices":null},
+    {"type":"Guppie", "difficulty":20, "prices":[
         {"costType":"Minnow", "costAmount":10}
     ]},
-    {"type":"Sardine", "duration":1000, "prices":[
+    {"type":"Sardine", "difficulty":30, "prices":[
         {"costType":"Guppie", "costAmount":10}
     ]},
-    {"type":"Sword Tail", "duration":1000, "prices":[
+    {"type":"Sword Tail", "difficulty":40, "prices":[
         {"costType":"Sardine", "costAmount":10}
     ]},
-    {"type":"Anchovy", "duration":1000, "prices":[
+    {"type":"Anchovy", "difficulty":50, "prices":[
         {"costType":"Sword Tail", "costAmount":10}
     ]},
-    {"type":"Tiger Pleco", "duration":1000, "prices":[
+    {"type":"Tiger Pleco", "difficulty":60, "prices":[
         {"costType":"Anchovy", "costAmount":10}
     ]},
-    {"type":"Herring", "duration":1000, "prices":[
+    {"type":"Herring", "difficulty":70, "prices":[
         {"costType":"Anchovy", "costAmount":10}
     ]},
-    {"type":"Mackerel", "duration":1000, "prices":[
+    {"type":"Mackerel", "difficulty":80, "prices":[
         {"costType":"Anchovy", "costAmount":10}
     ]},
-    {"type":"Catfish", "duration":1000, "prices":[
+    {"type":"Catfish", "difficulty":90, "prices":[
         {"costType":"Tiger Pleco", "costAmount":10}
     ]},
-    {"type":"Trout", "duration":1000, "prices":[
+    {"type":"Trout", "difficulty":100, "prices":[
         {"costType":"Herring", "costAmount":10}
     ]},
-    {"type":"Yellowtail", "duration":1000, "prices":[
+    {"type":"Yellowtail", "difficulty":110, "prices":[
         {"costType":"Mackerel", "costAmount":10}
     ]},
-    {"type":"Cod", "duration":1000, "prices":[
+    {"type":"Cod", "difficulty":120, "prices":[
         {"costType":"Catfish", "costAmount":10},
         {"costType":"Trout", "costAmount":10}
     ]},
-    {"type":"Salmon", "duration":1000, "prices":[
+    {"type":"Salmon", "difficulty":130, "prices":[
         {"costType":"Yellowtail", "costAmount":10},
         {"costType":"Trout", "costAmount":10}
     ]},
-    {"type":"Snapper", "duration":1000, "prices":[
+    {"type":"Snapper", "difficulty":140, "prices":[
         {"costType":"Cod", "costAmount":10},
         {"costType":"Salmon", "costAmount":10}
     ]},
-    {"type":"Halibut", "duration":1000, "prices":[
+    {"type":"Halibut", "difficulty":150, "prices":[
         {"costType":"Snapper", "costAmount":10}
     ]},
-    {"type":"Tuna", "duration":1000, "prices":[
+    {"type":"Tuna", "difficulty":160, "prices":[
         {"costType":"Halibut", "costAmount":10}
     ]},
-    {"type":"Shark", "duration":1000, "prices":[
+    {"type":"Shark", "difficulty":170, "prices":[
         {"costType":"Tuna", "costAmount":10}
     ]}
 ]
@@ -103,4 +105,16 @@ let fishingZones: Array<FishingZone> = [
         "Halibut",
         "Shark"
     ]}
+]
+
+let upgrades: Array<Upgrade> = [
+    {"name":"Buy Fish Hook", "description":"Reduces catch time for Minnows", "price":{"costType":"Guppie", "costAmount":1}, "hidden":false, "action":{
+        "type":"ReduceDifficulty", "modifier":"Minnow", "power":2
+    }},
+    {"name":"Buy Fishing Line", "description":"Reduces catch time for Minnows", "price":{"costType":"Guppie", "costAmount":1}, "hidden":true, "action":{
+        "type":"ReduceDifficulty", "modifier":"Minnow", "power":2
+    }},
+    {"name":"Buy Sinker", "description":"Reduces catch time for Minnows", "price":{"costType":"Guppie", "costAmount":1}, "hidden":true, "action":{
+        "type":"ReduceDifficulty", "modifier":"Minnow", "power":2
+    }}
 ]
