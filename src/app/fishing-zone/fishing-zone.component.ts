@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Player, World } from '../player';
+import { Player } from '../player'
+import { World } from '../world';
 import { FishingZone } from '../fishing-zone';
 
 @Component({

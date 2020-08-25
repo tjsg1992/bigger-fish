@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Player } from './player'
-import { World } from './player';
+import { World } from './world';
 
 @Component({
   selector: 'app-root',

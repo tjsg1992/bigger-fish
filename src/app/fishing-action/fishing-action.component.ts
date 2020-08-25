@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Player, World } from '../player';
+import { Player } from '../player';
+import { World } from '../world';
 import * as $ from 'jquery';
 
 @Component({
