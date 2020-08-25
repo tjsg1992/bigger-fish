@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FishingZone } from './fishing-zone';
-import { Fish, Price } from './fish';
-import { NONE_TYPE } from '@angular/compiler';
+import { Fish } from './fish';
 
 @Injectable({
     providedIn: 'root'
@@ -95,23 +94,57 @@ export class World {
 
 let fishTypes: Array<Fish> = [
     {"type":"Minnow", "duration":1000, "prices":null},
-    {"type":"Guppie", "duration":1000, "prices":[{"costType":"Minnow", "costAmount":2}]},
-    {"type":"Sardine", "duration":1000, "prices":null},
-    {"type":"Sword Tail", "duration":1000, "prices":null},
-    {"type":"Anchovy", "duration":1000, "prices":null},
-    {"type":"Herring", "duration":1000, "prices":null},
-    {"type":"Tiger Pleco", "duration":1000, "prices":null},
-    {"type":"Mackerel", "duration":1000, "prices":null},
-    {"type":"Catfish", "duration":1000, "prices":null},
-    {"type":"Trout", "duration":1000, "prices":null},
-    {"type":"Yellowtail", "duration":1000, "prices":null},
-    {"type":"Cod", "duration":1000, "prices":null},
-    {"type":"Tuna", "duration":1000, "prices":null},
-    {"type":"Salmon", "duration":1000, "prices":null},
-    {"type":"Snaper", "duration":1000, "prices":null},
-    {"type":"Halibut", "duration":1000, "prices":null},
-    {"type":"Swordfish", "duration":1000, "prices":null},
-    {"type":"Shark", "duration":1000, "prices":null}
+    {"type":"Guppie", "duration":1000, "prices":[
+        {"costType":"Minnow", "costAmount":10}
+    ]},
+    {"type":"Sardine", "duration":1000, "prices":[
+        {"costType":"Guppie", "costAmount":10}
+    ]},
+    {"type":"Sword Tail", "duration":1000, "prices":[
+        {"costType":"Sardine", "costAmount":10}
+    ]},
+    {"type":"Anchovy", "duration":1000, "prices":[
+        {"costType":"Sword Tail", "costAmount":10}
+    ]},
+    {"type":"Tiger Pleco", "duration":1000, "prices":[
+        {"costType":"Anchovy", "costAmount":10}
+    ]},
+    {"type":"Herring", "duration":1000, "prices":[
+        {"costType":"Anchovy", "costAmount":10}
+    ]},
+    {"type":"Mackerel", "duration":1000, "prices":[
+        {"costType":"Anchovy", "costAmount":10}
+    ]},
+    {"type":"Catfish", "duration":1000, "prices":[
+        {"costType":"Tiger Pleco", "costAmount":10}
+    ]},
+    {"type":"Trout", "duration":1000, "prices":[
+        {"costType":"Herring", "costAmount":10}
+    ]},
+    {"type":"Yellowtail", "duration":1000, "prices":[
+        {"costType":"Mackerel", "costAmount":10}
+    ]},
+    {"type":"Cod", "duration":1000, "prices":[
+        {"costType":"Catfish", "costAmount":10},
+        {"costType":"Trout", "costAmount":10}
+    ]},
+    {"type":"Salmon", "duration":1000, "prices":[
+        {"costType":"Yellowtail", "costAmount":10},
+        {"costType":"Trout", "costAmount":10}
+    ]},
+    {"type":"Snapper", "duration":1000, "prices":[
+        {"costType":"Cod", "costAmount":10},
+        {"costType":"Salmon", "costAmount":10}
+    ]},
+    {"type":"Halibut", "duration":1000, "prices":[
+        {"costType":"Snapper", "costAmount":10}
+    ]},
+    {"type":"Tuna", "duration":1000, "prices":[
+        {"costType":"Halibut", "costAmount":10}
+    ]},
+    {"type":"Shark", "duration":1000, "prices":[
+        {"costType":"Tuna", "costAmount":10}
+    ]}
 ]
 
 let fishingZones: Array<FishingZone> = [
@@ -123,13 +156,13 @@ let fishingZones: Array<FishingZone> = [
         "Mackerel"
     ]},
     {"name":"River", "fishTypes":[
-        "Anchovy",
+        "Tiger Pleco",
         "Herring",
         "Catfish",
         "Yellowtail"
     ]},
     {"name":"Harbor", "fishTypes":[
-        "Tiger Pleco",
+        "Anchovy",
         "Trout",
         "Cod",
         "Tuna"
