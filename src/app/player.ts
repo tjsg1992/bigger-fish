@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FishingZone } from './fishing-zone';
 import { Fish, Price } from './fish';
+import { NONE_TYPE } from '@angular/compiler';
 
 @Injectable({
     providedIn: 'root'
@@ -65,25 +66,11 @@ export class Player {
     providedIn: 'root'
 })
 export class World {
-    public fishingZones: Array<FishingZone> = new Array();
-    public fish: Array<Fish> = new Array();
+    public fishingZones: Array<FishingZone> = fishingZones;
+    public fish: Array<Fish> = fishTypes;
 
     constructor() {
-        let testFish1 = new Fish('TestFish1', 1000);
-        let testFish2 = new Fish('TestFish2', 5000);
-        testFish2.price = new Price('TestFish1', 2);
-        this.fish.push(testFish1);
-        this.fish.push(testFish2);
 
-        let fishingZone1 = new FishingZone('FishingZone1');
-        fishingZone1.fishTypes.push('TestFish1');
-        fishingZone1.fishTypes.push('TestFish2');
-        this.fishingZones.push(fishingZone1)
-
-        let fishingZone2 = new FishingZone('FishingZone2');
-        fishingZone2.fishTypes.push('TestFish3');
-        fishingZone2.fishTypes.push('TestFish4');
-        this.fishingZones.push(fishingZone2);
     }
 
     public getFish(fishType: string): Fish {
@@ -94,3 +81,52 @@ export class World {
         return this.fishingZones.find(fishingZone => fishingZone.name == fishingZoneName);
     }
 }
+
+let fishTypes: Array<Fish> = [
+    {"type":"Minnow", "duration":1000, "price":null},
+    {"type":"Guppie", "duration":10, "price":{"costType":"Minnow", "costAmount":2}},
+    {"type":"Sardine", "duration":10, "price":null},
+    {"type":"Sword Tail", "duration":10, "price":null},
+    {"type":"Anchovy", "duration":10, "price":null},
+    {"type":"Herring", "duration":10, "price":null},
+    {"type":"Tiger Pleco", "duration":10, "price":null},
+    {"type":"Mackerel", "duration":10, "price":null},
+    {"type":"Catfish", "duration":10, "price":null},
+    {"type":"Trout", "duration":10, "price":null},
+    {"type":"Yellowtail", "duration":10, "price":null},
+    {"type":"Cod", "duration":10, "price":null},
+    {"type":"Tuna", "duration":10, "price":null},
+    {"type":"Salmon", "duration":10, "price":null},
+    {"type":"Snaper", "duration":10, "price":null},
+    {"type":"Halibut", "duration":10, "price":null},
+    {"type":"Swordfish", "duration":10, "price":null},
+    {"type":"Shark", "duration":10, "price":null}
+]
+
+let fishingZones: Array<FishingZone> = [
+    {"name":"Pond", "fishTypes":[
+        "Minnow",
+        "Guppie",
+        "Sardine",
+        "Sword Tail",
+        "Mackerel"
+    ]},
+    {"name":"River", "fishTypes":[
+        "Anchovy",
+        "Herring",
+        "Catfish",
+        "Yellowtail"
+    ]},
+    {"name":"Harbor", "fishTypes":[
+        "Tiger Pleco",
+        "Trout",
+        "Cod",
+        "Tuna"
+    ]},
+    {"name":"Deep Ocean", "fishTypes":[
+        "Salmon",
+        "Snapper",
+        "Halibut",
+        "Shark"
+    ]}
+]

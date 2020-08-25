@@ -11,8 +11,6 @@ export class AppComponent {
   title = 'Bigger Fish';
 
   constructor(public player: Player, public world: World) {
-    player.fishInventory.set("TestFish1", 5);
-    player.fishInventory.set("TestFish2", 3);
     player.setFishingZone(world.fishingZones[0]);
   }
 
