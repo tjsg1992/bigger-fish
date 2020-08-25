@@ -26,11 +26,20 @@ export class Player {
 
     public canCatch(fishType: string): boolean {
         let fish = this.world.getFish(fishType);
-        if (!fish.price) {
+        if (!fish.prices || fish.prices.length == 0) {
             return true;
         }
-        let priceFishType = fish.price.costType;
-        return this.fishInventory.get(priceFishType) >= fish.price.costAmount;
+
+        let canCatch = true;
+        fish.prices.forEach(price => {
+            let fishInInventory = this.fishInventory.get(price.costType);
+            if (!fishInInventory || fishInInventory < price.costAmount) {
+                canCatch = false;
+            }
+        })
+        console.log(canCatch);
+        return canCatch;
+
     }
 
     public resolveCatch(): void {
@@ -43,11 +52,13 @@ export class Player {
 
     private purchase(fishType: string): void {
         let fish = this.world.getFish(fishType);
-        if (!fish.price) {
+        if (!fish.prices || fish.prices.length == 0) {
             return;
         }
-        let priceFishType = fish.price.costType;
-        this.fishInventory.set(priceFishType, this.fishInventory.get(priceFishType) - fish.price.costAmount);
+
+        fish.prices.forEach(price => {
+            this.fishInventory.set(price.costType, this.fishInventory.get(price.costType) - price.costAmount);
+        })
     }
 
     public purchaseActiveFish(): void {
@@ -83,24 +94,24 @@ export class World {
 }
 
 let fishTypes: Array<Fish> = [
-    {"type":"Minnow", "duration":1000, "price":null},
-    {"type":"Guppie", "duration":10, "price":{"costType":"Minnow", "costAmount":2}},
-    {"type":"Sardine", "duration":10, "price":null},
-    {"type":"Sword Tail", "duration":10, "price":null},
-    {"type":"Anchovy", "duration":10, "price":null},
-    {"type":"Herring", "duration":10, "price":null},
-    {"type":"Tiger Pleco", "duration":10, "price":null},
-    {"type":"Mackerel", "duration":10, "price":null},
-    {"type":"Catfish", "duration":10, "price":null},
-    {"type":"Trout", "duration":10, "price":null},
-    {"type":"Yellowtail", "duration":10, "price":null},
-    {"type":"Cod", "duration":10, "price":null},
-    {"type":"Tuna", "duration":10, "price":null},
-    {"type":"Salmon", "duration":10, "price":null},
-    {"type":"Snaper", "duration":10, "price":null},
-    {"type":"Halibut", "duration":10, "price":null},
-    {"type":"Swordfish", "duration":10, "price":null},
-    {"type":"Shark", "duration":10, "price":null}
+    {"type":"Minnow", "duration":1000, "prices":null},
+    {"type":"Guppie", "duration":1000, "prices":[{"costType":"Minnow", "costAmount":2}]},
+    {"type":"Sardine", "duration":1000, "prices":null},
+    {"type":"Sword Tail", "duration":1000, "prices":null},
+    {"type":"Anchovy", "duration":1000, "prices":null},
+    {"type":"Herring", "duration":1000, "prices":null},
+    {"type":"Tiger Pleco", "duration":1000, "prices":null},
+    {"type":"Mackerel", "duration":1000, "prices":null},
+    {"type":"Catfish", "duration":1000, "prices":null},
+    {"type":"Trout", "duration":1000, "prices":null},
+    {"type":"Yellowtail", "duration":1000, "prices":null},
+    {"type":"Cod", "duration":1000, "prices":null},
+    {"type":"Tuna", "duration":1000, "prices":null},
+    {"type":"Salmon", "duration":1000, "prices":null},
+    {"type":"Snaper", "duration":1000, "prices":null},
+    {"type":"Halibut", "duration":1000, "prices":null},
+    {"type":"Swordfish", "duration":1000, "prices":null},
+    {"type":"Shark", "duration":1000, "prices":null}
 ]
 
 let fishingZones: Array<FishingZone> = [

@@ -1,5 +1,5 @@
 export class Fish {
-    public price: Price;
+    public prices: Array<Price>;
 
     constructor(public type: string, public duration: number) {
 
