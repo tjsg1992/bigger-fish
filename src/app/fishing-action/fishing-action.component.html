@@ -2,7 +2,9 @@
 <div ngbDropdown class='d-inline-block'>
     <button class='btn btn-secondary' id="dropdownMenuButton" ngbDropdownToggle>Current Fish</button>
     <div ngbDropdownMenu aria-labelledby="dropdownMenuButton">
-        <button *ngFor='let fish of player.getFishingZone().fishTypes' ngbDropdownItem (click)=changeActiveFish(fish)>{{fish}}</button>
+        <div *ngFor='let fish of player.getFishingZone().fishTypes'>
+            <button *ngIf='world.getFish(fish).hidden == false' ngbDropdownItem (click)=changeActiveFish(fish)>{{world.getFish(fish).displayedName}}</button>
+        </div>
     </div>
 </div>
 <div>

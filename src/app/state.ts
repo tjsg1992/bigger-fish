@@ -24,6 +24,11 @@ export class State {
             this.world.getFish(fishType).difficulty -= upgrade.action.power;
         }
 
+        if (upgrade.action.type == "Unhide") {
+            let fishType = upgrade.action.modifier;
+            this.world.getFish(fishType).hidden = false;
+        }
+
         upgrade.purchased = true;
     }
 

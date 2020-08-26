@@ -5,7 +5,9 @@
 </div>
 <div>
   <h3>Available Fish</h3>
-  <p *ngFor='let fish of player.getFishingZone().fishTypes'>{{fish}}</p>
+  <div *ngFor='let fish of player.getFishingZone().fishTypes'>
+    <p *ngIf='world.getFish(fish).hidden == false'>{{world.getFish(fish).displayedName}}</p>
+  </div>
 </div>
 <div ngbDropdown class='d-inline-block'>
     <button class='btn btn-secondary' id="dropdownMenuButton" ngbDropdownToggle>Change Fishing Zone</button>
