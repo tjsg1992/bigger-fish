@@ -8,6 +8,7 @@ import { Fish, Price } from './fish';
     providedIn: 'root'
 })
 export class State {
+    public automators: Array<Automator> = [];
     constructor(public world: World, public player: Player) {
 
     }
@@ -44,6 +45,19 @@ export class State {
             if (action.type == "Change Yield") {
                 let fishType = action.modifier;
                 this.world.getFish(fishType).yield = action.power;
+            }
+
+            if (action.type == "Change Automation") {
+                let fishType = action.modifier;
+                let automator = this.automators.find(automator => automator.fishType == fishType);
+                if (automator) {
+                    automator.duration = action.power;
+                    automator.stop();
+                } else {
+                    automator = new Automator(fishType, action.power, this);
+                    this.automators.push(automator);
+                }
+                automator.start();
             }
         })
 
@@ -83,5 +97,26 @@ export class State {
                 })
             }
         })
+    }
+}
+
+export class Automator {
+    public running: boolean = false;
+    public interval;
+    
+    constructor(public fishType: string, public duration: number, public state: State) {
+
+    }
+
+    public start() { 
+        this.running = true;
+        this.interval = setInterval(() => {
+            this.state.facilitateCatch(this.fishType);
+        }, this.duration)
+    }
+
+    public stop(): void {
+        this.running = false;
+        clearInterval(this.interval);
     }
 }

@@ -133,5 +133,8 @@ let upgrades: Array<Upgrade> = [
     ]},
     {"name":"Buy Meal Worms", "description":"Catch 2 Minnows at a time", "price":{"costType":"Guppie", "costAmount":1}, "purchased":false,"available":true, "affordable":false, "actions":[
         {"type":"Change Yield", "modifier":"Minnow", "power":2}
+    ]},
+    {"name":"Buy Frayed Net", "description":"Catch Minnows Automatically", "price":{"costType":"Minnow", "costAmount":1}, "purchased":false,"available":true, "affordable":false, "actions":[
+        {"type":"Change Automation", "modifier":"Minnow", "power":1000}
     ]}
 ]
