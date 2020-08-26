@@ -26,14 +26,14 @@ export class FishingActionComponent implements OnInit {
   public catchActiveFish(): void {
     if (this.player.canCatch(this.player.activeFish)) {
       this.state.facilitatePurchase(this.player.activeFish);
-      this.catchTracker.start(this.world.getFish(this.player.activeFish).difficulty);
+      this.catchTracker.start(this.world.getFish(this.player.activeFish).difficulty, this.player.activeFish);
       this.catchInProgress = true;
     }
     
   }
 
-  public resolveCatch(): void {
-    this.state.facilitateCatch();
+  public resolveCatch(fishType: string): void {
+    this.state.facilitateCatch(fishType);
     this.catchInProgress = false;
   }
 
@@ -44,18 +44,19 @@ export class CatchTracker {
   public intervalLength = 10;
   public duration: number;
   public interval;
+  public fishType: string;
 
   constructor(public callback: FishingActionComponent) {
       
   }
 
-  public start(difficulty: number) {
+  public start(difficulty: number, fishType: string) {
+      this.fishType = fishType;
       if (this.timeElapsed > 0) {
           return;
       }
 
       this.duration = difficulty * 100;
-      //TEMP
       // this.duration = 1;
       this.interval = setInterval(() => {
         let percentageComplete = (this.timeElapsed / this.duration) * 100;
@@ -63,7 +64,7 @@ export class CatchTracker {
               this.timeElapsed += this.intervalLength;
               $('.progress-bar').css('width', percentageComplete + '%');
           } else {
-              this.callback.resolveCatch();
+              this.callback.resolveCatch(this.fishType);
               this.reset();
           }
       }, this.intervalLength)

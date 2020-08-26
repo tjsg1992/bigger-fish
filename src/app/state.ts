@@ -37,8 +37,8 @@ export class State {
         this.updateUpgrades();
     }
 
-    public facilitateCatch() {
-        this.player.resolveCatch();
+    public facilitateCatch(fishType: string) {
+        this.player.resolveCatch(fishType);
         this.updateUpgrades();
     }
 

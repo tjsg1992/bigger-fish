@@ -44,8 +44,9 @@ export class Player {
         return canAfford;
     }
 
-    public resolveCatch(): void {
-        this.addToInventory(this.activeFish);
+    public resolveCatch(fishType: string): void {
+        console.log(fishType);
+        this.addToInventory(fishType);
     }
 
     public canCatchActiveFish(): boolean {
