@@ -1,4 +1,4 @@
 <h2>Upgrade Menu</h2>
 <div *ngFor='let upgrade of world.upgrades'>
-    <button *ngIf='upgrade.available == true && upgrade.purchased == false' class='btn btn-primary' (click)=buyUpgrade(upgrade) [disabled]="!upgrade.affordable">{{upgrade.name}}<br/>Costs {{upgrade.price.costAmount}} {{upgrade.price.costType}}<br/>{{upgrade.description}}</button>
+    <button *ngIf='upgrade.available == true && upgrade.purchased == false' class='btn btn-primary' (click)=buyUpgrade(upgrade) [disabled]="!upgrade.affordable">{{upgrade.name}}<br/>{{upgrade.costDisplay}}<br/>{{upgrade.description}}</button>
 </div>

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FishingZone } from './fishing-zone';
 import { Fish } from './fish';
-import { Upgrade } from './upgrade'
+import { Upgrade, JSONUpgrade } from './upgrade'
 
 @Injectable({
     providedIn: 'root'
@@ -10,7 +10,6 @@ export class World {
     public fishingZones: Array<FishingZone> = fishingZones;
     public fish: Array<Fish> = fishTypes;
     public upgrades: Array<Upgrade> = upgrades;
-
     public zonesAreRevealed: boolean = false;
 
     constructor() {
@@ -109,34 +108,48 @@ let fishingZones: Array<FishingZone> = [
     ]}
 ]
 
-let upgrades: Array<Upgrade> = [
-    {"name":"Buy Fish Hook", "description":"Reduces catch time for Minnows", "price":{"costType":"Minnow", "costAmount":1}, "purchased":false, "available":true, "affordable":false, "actions":[
+let jsonUpgrades: Array<JSONUpgrade> = [
+    {"name":"Buy Fish Hook", "description":"Reduces catch time for Minnows", "price":{"costType":"Minnow", "costAmount":10}, "actions":[
         {"type":"Reduce Difficulty", "modifier":"Minnow", "power":2},
-        {"type":"Unlock Upgrade", "modifier":"Buy Fishing Line", "power":NaN}
+        {"type":"Unlock Upgrade", "modifier":"Buy Fishing Line", "power":NaN},
+        {"type":"Unlock Upgrade", "modifier":"Find Fish Picture Book", "power":NaN}
     ]},
-    {"name":"Buy Fishing Line", "description":"Reduces catch time for Minnows", "price":{"costType":"Guppie", "costAmount":1}, "purchased":false,"available":false, "affordable":false, "actions":[
+    {"name":"Buy Fishing Line", "description":"Reduces catch time for Minnows", "price":{"costType":"Minnow", "costAmount":10}, "actions":[
         {"type":"Reduce Difficulty", "modifier":"Minnow", "power":2},
         {"type":"Unlock Upgrade", "modifier":"Buy Sinker", "power":NaN}
     ]},
-    {"name":"Buy Sinker", "description":"Reduces catch time for Minnows", "price":{"costType":"Guppie", "costAmount":1}, "purchased":false,"available":false, "affordable":false, "actions":[
-        {"type":"Reduce Difficulty", "modifier":"Minnow", "power":2}
-    ]},
-    {"name":"Find Fish Picture Book", "description":"Unlock the next fish", "price":{"costType":"Minnow", "costAmount":5}, "purchased":false,"available":true, "affordable":false, "actions":[
+    {"name":"Find Fish Picture Book", "description":"Unlock the next fish", "price":{"costType":"Minnow", "costAmount":15}, "actions":[
         {"type":"Unhide Fish", "modifier":"Guppie", "power":NaN},
         {"type":"Unlock Upgrade", "modifier":"Buy Fish Dictionary", "power":NaN}
     ]},
-    {"name":"Buy Fish Dictionary", "description":"Automatically unlocks the next available fish", "price":{"costType":"Minnow", "costAmount":10}, "purchased":false,"available":false, "affordable":false, "actions":[
+    {"name":"Buy Sinker", "description":"Reduces catch time for Minnows", "price":{"costType":"Guppie", "costAmount":1}, "actions":[
+        {"type":"Reduce Difficulty", "modifier":"Minnow", "power":2},
+        {"type":"Unlock Upgrade", "modifier":"Buy Meal Worms", "power":NaN}
+    ]},
+    {"name":"Buy Meal Worms", "description":"Catch 2 Minnows at a time", "price":{"costType":"Minnow", "costAmount":15}, "actions":[
+        {"type":"Change Yield", "modifier":"Minnow", "power":2},
+        {"type":"Unlock Upgrade", "modifier":"Buy Frayed Net", "power":NaN}
+    ]},
+    {"name":"Buy Fish Dictionary", "description":"Automatically unlocks the next available fish", "price":{"costType":"Guppie", "costAmount":2}, "actions":[
         {"type":"Unhide Fish", "modifier":"Sardine", "power":NaN},
         {"type":"Unlock Upgrade", "modifier":"Buy Fish Encyclopedia", "power":NaN}
     ]},
-    {"name":"Buy Fish Encyclopedia", "description":"Reveal all fish and zones", "price":{"costType":"Minnow", "costAmount":10}, "purchased":false,"available":false, "affordable":false, "actions":[
+    {"name":"Buy Fish Encyclopedia", "description":"Reveal all fish and zones", "price":{"costType":"Guppie", "costAmount":3}, "actions":[
         {"type":"Unhide Fish", "modifier":"All", "power":NaN},
         {"type":"Unhide Zone", "modifier":"All", "power":NaN}
     ]},
-    {"name":"Buy Meal Worms", "description":"Catch 2 Minnows at a time", "price":{"costType":"Guppie", "costAmount":1}, "purchased":false,"available":true, "affordable":false, "actions":[
-        {"type":"Change Yield", "modifier":"Minnow", "power":2}
-    ]},
-    {"name":"Buy Frayed Net", "description":"Catch Minnows Automatically", "price":{"costType":"Minnow", "costAmount":1}, "purchased":false,"available":true, "affordable":false, "actions":[
+    {"name":"Buy Frayed Net", "description":"Catch Minnows Automatically", "price":{"costType":"Sardine", "costAmount":1}, "actions":[
         {"type":"Change Automation", "modifier":"Minnow", "power":1000}
     ]}
 ]
+
+let upgrades: Array<Upgrade> = [];
+jsonUpgrades.forEach(jsonUpgrade => {
+    upgrades.push(new Upgrade(jsonUpgrade));
+})
+
+upgrades.find(upgrade => {
+    if (upgrade.name == "Buy Fish Hook") {
+        upgrade.available = true;
+    }
+})

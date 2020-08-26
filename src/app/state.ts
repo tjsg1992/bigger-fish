@@ -65,7 +65,7 @@ export class State {
                 automator.start();
             }
         })
-
+        this.updateHiddenUpgrade();
         upgrade.purchased = true;
 
     }
@@ -85,6 +85,7 @@ export class State {
         this.updateUpgrades();
         this.updateHiddenFish(fishType);
         this.updateHiddenZone(fishType);
+        this.updateHiddenUpgrade();
     }
 
     public updateUpgrades() {
@@ -112,6 +113,16 @@ export class State {
                     fishingZone.traversable = true;
                     fishingZone.displayedName = fishingZone.name;
                 }
+            }
+        })
+    }
+
+    public updateHiddenUpgrade() {
+        this.world.upgrades.forEach(upgrade => {
+            let fish = this.world.fish.find(fish => fish.type == upgrade.price.costType)
+            if (fish && !fish.hidden) {
+                upgrade.costTypeRevealed = true;
+                upgrade.setCostDisplay();
             }
         })
     }
