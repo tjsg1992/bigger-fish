@@ -45,7 +45,6 @@ export class Player {
     }
 
     public resolveCatch(fishType: string): void {
-        console.log(fishType);
         this.addToInventory(fishType);
     }
 

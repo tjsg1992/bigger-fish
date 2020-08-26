@@ -84,6 +84,7 @@ export class State {
         this.player.resolveCatch(fishType);
         this.updateUpgrades();
         this.updateHiddenFish(fishType);
+        this.updateHiddenZone(fishType);
     }
 
     public updateUpgrades() {
@@ -100,6 +101,17 @@ export class State {
                         fish.displayedName = fish.type;
                     }
                 })
+            }
+        })
+    }
+
+    public updateHiddenZone(caughtFishType: string) {
+        this.world.fishingZones.forEach(fishingZone => {
+            if (!fishingZone.traversable) {
+                if (fishingZone.unlockedBy == caughtFishType) {
+                    fishingZone.traversable = true;
+                    fishingZone.displayedName = fishingZone.name;
+                }
             }
         })
     }

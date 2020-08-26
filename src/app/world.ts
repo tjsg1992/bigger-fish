@@ -37,23 +37,23 @@ let fishTypes: Array<Fish> = [
     {"type":"Sword Tail", "difficulty":40, "hidden":true, "displayedName":"???", "yield":1, "prices":[
         {"costType":"Sardine", "costAmount":10}
     ]},
-    {"type":"Anchovy", "difficulty":50, "hidden":true, "displayedName":"???", "yield":1, "prices":[
+    {"type":"Tiger Pleco", "difficulty":50, "hidden":true, "displayedName":"???", "yield":1, "prices":[
         {"costType":"Sword Tail", "costAmount":10}
     ]},
-    {"type":"Tiger Pleco", "difficulty":60, "hidden":true, "displayedName":"???", "yield":1, "prices":[
-        {"costType":"Anchovy", "costAmount":10}
+    {"type":"Herring", "difficulty":60, "hidden":true, "displayedName":"???", "yield":1, "prices":[
+        {"costType":"Tiger Pleco", "costAmount":10}
     ]},
-    {"type":"Herring", "difficulty":70, "hidden":true, "displayedName":"???", "yield":1, "prices":[
-        {"costType":"Anchovy", "costAmount":10}
+    {"type":"Anchovy", "difficulty":70, "hidden":true, "displayedName":"???", "yield":1, "prices":[
+        {"costType":"Herring", "costAmount":10}
     ]},
     {"type":"Mackerel", "difficulty":80, "hidden":true, "displayedName":"???", "yield":1, "prices":[
         {"costType":"Anchovy", "costAmount":10}
     ]},
     {"type":"Catfish", "difficulty":90, "hidden":true, "displayedName":"???", "yield":1, "prices":[
-        {"costType":"Tiger Pleco", "costAmount":10}
+        {"costType":"Anchovy", "costAmount":10}
     ]},
     {"type":"Trout", "difficulty":100, "hidden":true, "displayedName":"???", "yield":1, "prices":[
-        {"costType":"Herring", "costAmount":10}
+        {"costType":"Anchovy", "costAmount":10}
     ]},
     {"type":"Yellowtail", "difficulty":110, "hidden":true, "displayedName":"???", "yield":1, "prices":[
         {"costType":"Mackerel", "costAmount":10}
@@ -82,26 +82,26 @@ let fishTypes: Array<Fish> = [
 ]
 
 let fishingZones: Array<FishingZone> = [
-    {"name":"Pond", "displayedName":"Pond", "traversable":true, "fishTypes":[
+    {"name":"Pond", "displayedName":"Pond", "traversable":true, "unlockedBy":null, "fishTypes":[
         "Minnow",
         "Guppie",
         "Sardine",
         "Sword Tail",
         "Mackerel"
     ]},
-    {"name":"River", "displayedName":"???", "traversable":false, "fishTypes":[
+    {"name":"River", "displayedName":"???", "traversable":false, "unlockedBy":"Sword Tail", "fishTypes":[
         "Tiger Pleco",
         "Herring",
         "Catfish",
         "Yellowtail"
     ]},
-    {"name":"Harbor", "displayedName":"???", "traversable":false, "fishTypes":[
+    {"name":"Harbor", "displayedName":"???", "traversable":false, "unlockedBy":"Herring", "fishTypes":[
         "Anchovy",
         "Trout",
         "Cod",
         "Tuna"
     ]},
-    {"name":"Deep Ocean", "displayedName":"???", "traversable":false, "fishTypes":[
+    {"name":"Deep Ocean", "displayedName":"???", "traversable":false, "unlockedBy":"Tuna", "fishTypes":[
         "Salmon",
         "Snapper",
         "Halibut",
