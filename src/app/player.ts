@@ -71,7 +71,7 @@ export class Player {
         if (!this.fishInventory.get(fishType)) {
             this.fishInventory.set(fishType, 0);
         }
-        this.fishInventory.set(fishType, this.fishInventory.get(fishType) + 1);
+        this.fishInventory.set(fishType, this.fishInventory.get(fishType) + this.world.getFish(fishType).yield);
     }
 }
 

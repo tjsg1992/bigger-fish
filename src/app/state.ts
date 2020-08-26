@@ -19,17 +19,36 @@ export class State {
 
         this.facilitatePayment([upgrade.price]);
 
-        if (upgrade.action.type == "ReduceDifficulty") {
-            let fishType = upgrade.action.modifier;
-            this.world.getFish(fishType).difficulty -= upgrade.action.power;
-        }
+        upgrade.actions.forEach(action => {
+            if (action.type == "Reduce Difficulty") {
+                let fishType = action.modifier;
+                this.world.getFish(fishType).difficulty -= action.power;
+            }
+    
+            if (action.type == "Unhide Fish") {
+                let fishType = action.modifier;
+                if (fishType == "All") {
+                    this.world.fish.forEach(fish => {
+                        fish.hidden = false;
+                    })
+                } else {
+                    this.world.getFish(fishType).hidden = false;
+                }
+            }        
 
-        if (upgrade.action.type == "Unhide") {
-            let fishType = upgrade.action.modifier;
-            this.world.getFish(fishType).hidden = false;
-        }
+            if (action.type == "Unlock Upgrade") {
+                let upgrade = this.world.upgrades.find(upgrade => upgrade.name == action.modifier);
+                upgrade.available = true;
+            }
+
+            if (action.type == "Change Yield") {
+                let fishType = action.modifier;
+                this.world.getFish(fishType).yield = action.power;
+            }
+        })
 
         upgrade.purchased = true;
+
     }
 
     public facilitatePurchase(fishType: string) {
@@ -45,11 +64,24 @@ export class State {
     public facilitateCatch(fishType: string) {
         this.player.resolveCatch(fishType);
         this.updateUpgrades();
+        this.updateHiddenFish(fishType);
     }
 
     public updateUpgrades() {
         this.world.upgrades.forEach(upgrade => {
             upgrade.affordable = this.player.canAfford([upgrade.price]);
+        })
+    }
+
+    public updateHiddenFish(caughtFishType: string) {
+        this.world.fish.forEach(fish => {
+            if (fish.prices) {
+                fish.prices.forEach(price => {
+                    if (price.costType == caughtFishType) {
+                        fish.displayedName = fish.type;
+                    }
+                })
+            }
         })
     }
 }
