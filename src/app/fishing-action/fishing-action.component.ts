@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Player } from '../player';
 import { World } from '../world';
+import { State } from '../state';
 import * as $ from 'jquery';
 
 @Component({
@@ -11,8 +12,9 @@ import * as $ from 'jquery';
 export class FishingActionComponent implements OnInit {
 
   public catchTracker: CatchTracker = new CatchTracker(this);
+  public catchInProgress: boolean = false;
 
-  constructor(public player: Player, public world: World) { }
+  constructor(public player: Player, public world: World, public state: State) { }
 
   ngOnInit(): void {
   }
@@ -22,15 +24,17 @@ export class FishingActionComponent implements OnInit {
   }
 
   public catchActiveFish(): void {
-    if (this.player.canCatchActiveFish()) {
-      this.player.purchaseActiveFish();
+    if (this.player.canCatch(this.player.activeFish)) {
+      this.state.facilitatePurchase(this.player.activeFish);
       this.catchTracker.start(this.world.getFish(this.player.activeFish).difficulty);
+      this.catchInProgress = true;
     }
     
   }
 
   public resolveCatch(): void {
-    this.player.resolveCatch();
+    this.state.facilitateCatch();
+    this.catchInProgress = false;
   }
 
 }

@@ -108,13 +108,13 @@ let fishingZones: Array<FishingZone> = [
 ]
 
 let upgrades: Array<Upgrade> = [
-    {"name":"Buy Fish Hook", "description":"Reduces catch time for Minnows", "price":{"costType":"Guppie", "costAmount":1}, "hidden":false, "action":{
+    {"name":"Buy Fish Hook", "description":"Reduces catch time for Minnows", "price":{"costType":"Minnow", "costAmount":1}, "purchased":false, "available":true, "affordable":false, "action":{
         "type":"ReduceDifficulty", "modifier":"Minnow", "power":2
     }},
-    {"name":"Buy Fishing Line", "description":"Reduces catch time for Minnows", "price":{"costType":"Guppie", "costAmount":1}, "hidden":true, "action":{
+    {"name":"Buy Fishing Line", "description":"Reduces catch time for Minnows", "price":{"costType":"Guppie", "costAmount":1}, "purchased":false,"available":true, "affordable":false, "action":{
         "type":"ReduceDifficulty", "modifier":"Minnow", "power":2
     }},
-    {"name":"Buy Sinker", "description":"Reduces catch time for Minnows", "price":{"costType":"Guppie", "costAmount":1}, "hidden":true, "action":{
+    {"name":"Buy Sinker", "description":"Reduces catch time for Minnows", "price":{"costType":"Guppie", "costAmount":1}, "purchased":false,"available":true, "affordable":false, "action":{
         "type":"ReduceDifficulty", "modifier":"Minnow", "power":2
     }}
 ]

@@ -66,10 +66,6 @@ export class Player {
         })
     }
 
-    public purchaseActiveFish(): void {
-        this.purchase(this.activeFish);
-    }
-
     private addToInventory(fishType: string): void {
         if (!this.fishInventory.get(fishType)) {
             this.fishInventory.set(fishType, 0);

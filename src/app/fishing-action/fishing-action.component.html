@@ -10,7 +10,7 @@
     <p>{{player.activeFish}}</p>
 </div>
 <div>
-    <button class='btn btn-primary' id='catchFishButton' (click)=catchActiveFish()>Catch</button>
+    <button class='btn btn-primary' id='catchFishButton' (click)=catchActiveFish() [disabled]="catchInProgress">Catch</button>
     <div class='progress'>
         <div class='progress-bar' role='progressbar'></div>
     </div>

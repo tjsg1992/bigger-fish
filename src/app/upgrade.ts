@@ -1,7 +1,9 @@
 import { Price } from './fish'
 
 export class Upgrade {
-    public hidden: boolean = true;
+    public purchased: boolean = true;
+    public available: boolean = false;
+    public affordable: boolean = false;
     constructor(public name: string, public description: string, public price: Price, public action: UpgradeAction) {
 
     }
