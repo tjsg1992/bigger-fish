@@ -11,6 +11,8 @@ export class World {
     public fish: Array<Fish> = fishTypes;
     public upgrades: Array<Upgrade> = upgrades;
 
+    public zonesAreRevealed: boolean = false;
+
     constructor() {
 
     }
@@ -80,26 +82,26 @@ let fishTypes: Array<Fish> = [
 ]
 
 let fishingZones: Array<FishingZone> = [
-    {"name":"Pond", "fishTypes":[
+    {"name":"Pond", "displayedName":"Pond", "traversable":true, "fishTypes":[
         "Minnow",
         "Guppie",
         "Sardine",
         "Sword Tail",
         "Mackerel"
     ]},
-    {"name":"River", "fishTypes":[
+    {"name":"River", "displayedName":"???", "traversable":false, "fishTypes":[
         "Tiger Pleco",
         "Herring",
         "Catfish",
         "Yellowtail"
     ]},
-    {"name":"Harbor", "fishTypes":[
+    {"name":"Harbor", "displayedName":"???", "traversable":false, "fishTypes":[
         "Anchovy",
         "Trout",
         "Cod",
         "Tuna"
     ]},
-    {"name":"Deep Ocean", "fishTypes":[
+    {"name":"Deep Ocean", "displayedName":"???", "traversable":false, "fishTypes":[
         "Salmon",
         "Snapper",
         "Halibut",

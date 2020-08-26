@@ -9,6 +9,7 @@ import { Fish, Price } from './fish';
 })
 export class State {
     public automators: Array<Automator> = [];
+
     constructor(public world: World, public player: Player) {
 
     }
@@ -36,6 +37,10 @@ export class State {
                     this.world.getFish(fishType).hidden = false;
                 }
             }        
+
+            if (action.type == "Unhide Zone") {
+                this.world.zonesAreRevealed = true;
+            }     
 
             if (action.type == "Unlock Upgrade") {
                 let upgrade = this.world.upgrades.find(upgrade => upgrade.name == action.modifier);

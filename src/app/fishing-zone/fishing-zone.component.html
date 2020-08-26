@@ -9,9 +9,9 @@
     <p *ngIf='world.getFish(fish).hidden == false'>{{world.getFish(fish).displayedName}}</p>
   </div>
 </div>
-<div ngbDropdown class='d-inline-block'>
+<div *ngIf='world.zonesAreRevealed' ngbDropdown class='d-inline-block'>
     <button class='btn btn-secondary' id="dropdownMenuButton" ngbDropdownToggle>Change Fishing Zone</button>
     <div ngbDropdownMenu aria-labelledby="dropdownMenuButton">
-      <button *ngFor='let fishingZone of world.fishingZones' ngbDropdownItem (click)=changeFishingZone(fishingZone.name)>{{fishingZone.name}}</button>
+      <button *ngFor='let fishingZone of world.fishingZones' ngbDropdownItem (click)=changeFishingZone(fishingZone.name) [disabled]='!fishingZone.traversable'>{{fishingZone.displayedName}}</button>
     </div>
 </div>
