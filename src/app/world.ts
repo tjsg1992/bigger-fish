@@ -109,37 +109,57 @@ let fishingZones: Array<FishingZone> = [
 ]
 
 let jsonUpgrades: Array<JSONUpgrade> = [
-    {"name":"Buy Fish Hook", "description":"Reduces catch time for Minnows", "price":{"costType":"Minnow", "costAmount":10}, "actions":[
+    {"name":"Fish Hook", "description":"Reduces catch time for Minnows", "price":{"costType":"Minnow", "costAmount":10}, "actions":[
         {"type":"Reduce Difficulty", "modifier":"Minnow", "power":2},
-        {"type":"Unlock Upgrade", "modifier":"Buy Fishing Line", "power":NaN},
-        {"type":"Unlock Upgrade", "modifier":"Find Fish Picture Book", "power":NaN}
+        {"type":"Unlock Upgrade", "modifier":"Fishing Line", "power":NaN},
+        {"type":"Unlock Upgrade", "modifier":"Fish Picture Book", "power":NaN}
     ]},
-    {"name":"Buy Fishing Line", "description":"Reduces catch time for Minnows", "price":{"costType":"Minnow", "costAmount":10}, "actions":[
+    {"name":"Fishing Line", "description":"Reduces catch time for Minnows", "price":{"costType":"Minnow", "costAmount":10}, "actions":[
         {"type":"Reduce Difficulty", "modifier":"Minnow", "power":2},
-        {"type":"Unlock Upgrade", "modifier":"Buy Sinker", "power":NaN}
+        {"type":"Unlock Upgrade", "modifier":"Sinker", "power":NaN},
+        {"type":"Unlock Upgrade", "modifier":"Better Bait", "power":NaN},
+        {"type":"Unlock Upgrade", "modifier":"Fishing Hook 2", "power":NaN}
     ]},
-    {"name":"Find Fish Picture Book", "description":"Unlock the next fish", "price":{"costType":"Minnow", "costAmount":15}, "actions":[
+    {"name":"Fish Picture Book", "description":"Unlock the next fish", "price":{"costType":"Minnow", "costAmount":15}, "actions":[
         {"type":"Unhide Fish", "modifier":"Guppie", "power":NaN},
-        {"type":"Unlock Upgrade", "modifier":"Buy Fish Dictionary", "power":NaN}
+        {"type":"Unlock Upgrade", "modifier":"Better Bait", "power":NaN},
+        {"type":"Unlock Upgrade", "modifier":"Fishing Hook 2", "power":NaN}
     ]},
-    {"name":"Buy Sinker", "description":"Reduces catch time for Minnows", "price":{"costType":"Guppie", "costAmount":1}, "actions":[
+    {"name":"Sinker", "description":"Reduces catch time for Minnows", "price":{"costType":"Guppie", "costAmount":1}, "actions":[
         {"type":"Reduce Difficulty", "modifier":"Minnow", "power":2},
-        {"type":"Unlock Upgrade", "modifier":"Buy Meal Worms", "power":NaN}
+        {"type":"Unlock Upgrade", "modifier":"Fish Dictionary", "power":NaN}
     ]},
-    {"name":"Buy Meal Worms", "description":"Catch 2 Minnows at a time", "price":{"costType":"Minnow", "costAmount":15}, "actions":[
+    {"name":"Better Bait", "description":"Catch 2 Minnows at a time", "price":{"costType":"Guppie", "costAmount":2}, "actions":[
         {"type":"Change Yield", "modifier":"Minnow", "power":2},
-        {"type":"Unlock Upgrade", "modifier":"Buy Frayed Net", "power":NaN}
+        {"type":"Unlock Upgrade", "modifier":"Fish Dictionary", "power":NaN}
     ]},
-    {"name":"Buy Fish Dictionary", "description":"Automatically unlocks the next available fish", "price":{"costType":"Guppie", "costAmount":2}, "actions":[
+    {"name":"Fishing Hook 2", "description":"Reduces catch time for Guppies", "price":{"costType":"Guppie", "costAmount":3}, "actions":[
+        {"type":"Reduce Difficulty", "modifier":"Guppie", "power":3},
+        {"type":"Unlock Upgrade", "modifier":"Fish Dictionary", "power":NaN}
+    ]},
+    {"name":"Fish Dictionary", "description":"Automatically unlocks the next available fish", "price":{"costType":"Guppie", "costAmount":3}, "actions":[
         {"type":"Unhide Fish", "modifier":"Sardine", "power":NaN},
-        {"type":"Unlock Upgrade", "modifier":"Buy Fish Encyclopedia", "power":NaN}
+        {"type":"Unlock Upgrade", "modifier":"Minnow Net", "power":NaN},
+        {"type":"Unlock Upgrade", "modifier":"Fish Encyclopedia", "power":NaN},
+        {"type":"Unlock Upgrade", "modifier":"Better Minnows", "power":NaN},
+        {"type":"Unlock Upgrade", "modifier":"Better Bait 2", "power":NaN}
     ]},
-    {"name":"Buy Fish Encyclopedia", "description":"Reveal all fish and zones", "price":{"costType":"Guppie", "costAmount":3}, "actions":[
+    {"name":"Better Bait 2", "description":"Catch 4 Minnows at a time", "price":{"costType":"Guppie", "costAmount":4}, "actions":[
+        {"type":"Change Yield", "modifier":"Minnow", "power":4},
+        {"type":"Unlock Upgrade", "modifier":"Fish Dictionary", "power":NaN}
+    ]},
+    {"name":"Minnow Net", "description":"Catch Minnows Automatically", "price":{"costType":"Sardine", "costAmount":1}, "actions":[
+        {"type":"Change Automation", "modifier":"Minnow", "power":1000}
+    ]},
+    {"name":"Fish Encyclopedia", "description":"Reveal all fish and zones", "price":{"costType":"Sardine", "costAmount":1}, "actions":[
         {"type":"Unhide Fish", "modifier":"All", "power":NaN},
         {"type":"Unhide Zone", "modifier":"All", "power":NaN}
     ]},
-    {"name":"Buy Frayed Net", "description":"Catch Minnows Automatically", "price":{"costType":"Sardine", "costAmount":1}, "actions":[
-        {"type":"Change Automation", "modifier":"Minnow", "power":1000}
+    {"name":"Better Minnows", "description":"Catch 2 Guppies at a time", "price":{"costType":"Sardine", "costAmount":1}, "actions":[
+        {"type":"Change Yield", "modifier":"Guppie", "power":2}
+    ]},
+    {"name":"Guppie Net", "description":"Catch Guppies Automatically", "price":{"costType":"Sardine", "costAmount":2}, "actions":[
+        {"type":"Change Automation", "modifier":"Guppie", "power":1000}
     ]}
 ]
 
@@ -149,7 +169,7 @@ jsonUpgrades.forEach(jsonUpgrade => {
 })
 
 upgrades.find(upgrade => {
-    if (upgrade.name == "Buy Fish Hook") {
+    if (upgrade.name == "Fish Hook") {
         upgrade.available = true;
     }
 })
